@@ -2,6 +2,10 @@ const Post = require("../../models/Post");
 
 exports.postsCreate = async (req, res) => {
   try {
+    if(req.file){
+      console.log(req.file)
+      req.body.file = req.file.path
+    }
     const newPost = await Post.create(req.body);
     res.status(201).json(newPost);
   } catch (error) {
